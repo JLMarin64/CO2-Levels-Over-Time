@@ -1,0 +1,48 @@
+---
+title: "CO2 Levels Through Time"
+author: "Jonathan Marin"
+date: "August 27, 2017"
+output: ioslides_presentation
+---
+
+## Introduction
+
+
+Paleoclimatologists have been studying ancient air frozen in the polar ice caps.  When Ice freezes, air bubbles are often trapped and preserved through time.  These air bubbles can then be examined and scientists have been able to measure what historic air was made up of in parts per million.  With average rising temperatures and the boom of industry and technology by man, we can see throughout history what the highest level of CO2 is and how the current century compares. 
+
+
+## Data 
+
+-Data was downloaded from the NOAA website and can be found here: [Data Link](https://www1.ncdc.noaa.gov/pub/data/paleo/icecore/antarctica/law/law2006.txt)
+
+-Data was then formatted to a csv file
+
+
+```{r echo=TRUE, message = FALSE, cache=FALSE, warning=FALSE, comment=FALSE, warning=FALSE}
+library(plotly)
+
+setwd("C:/Users/Marin Family/Documents/R/CO2throughTime")
+
+climateData <- read.csv("CO2 Levels Through Time.csv")
+```
+
+## Data Plot
+
+The following is a dataplot showing what the CO2 levels were per year in parts ber billion. It is an interactive plot, but may be cumbersome to viewers. 
+
+```{r echo=FALSE, cache=FALSE, message = FALSE, results=TRUE, warning=FALSE, comment=FALSE, warning=FALSE}
+plot_ly(climateData, x = climateData$YearAD, y = climateData$CO2spl, mode = "lines") %>%
+  
+  layout(
+    title = "CO2 Levels Through Time in Parts per Billion",
+         yaxis = list(title = "CO2 in Parts Per Billion"),
+         xaxis = list(title = "Year")
+         )
+```
+
+
+##RShiny App
+
+The following link will direct the user to an app that can help the user see and monitor CO2 levels. 
+
+[ClimateChangeApp](https://jlmarin64.shinyapps.io/CO2LevelsPerYear/)
